@@ -1,4 +1,7 @@
-demos
-=====
+# Demos
 
-Some demo for fun.
+Some demos for fun.
+
+- Css Tricks
+    - [Foldable menu without javascript]()
+    - [Tabs without javascript]()
