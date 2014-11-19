@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Float control on xiaomi4 page</title>
+		<link href="assets/doggy.css" type="text/css" rel="stylesheet" />
+		<style>
+			h1 {
+				text-align:center;
+			}
+			.img {
+				width:1099px;
+				height:569px;
+				position:absolute;
+				top:0;
+				left:0;
+			}
+			.wrapper {
+				width:1099px;
+				position:relative;
+				margin:0 auto;
+			}
+			.white {
+				background:url('assets/img/white.png') no-repeat #fff;
+			}
+			.black {
+				background:url('assets/img/black.png') no-repeat #000;
+				z-index:1;
+				width:100px;
+				max-width:1099px
+			}
+			.control {
+				display:block;
+				background:url('assets/img/control.png') no-repeat 4px;
+				position:absolute;
+				left:75px;
+				top:400px;
+				height:50px;
+				width:50px;
+				z-index:2;
+				cursor:pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>This a simple demo for basic front-end development.</h1>
+		<div class="wrapper">
+			<div class="img white"></div>
+			<div class="img black"></div>
+			<div class="control"></div>
+		</div>
+		<script>
+			"use strict";
+			var $control = document.querySelector('.control'),
+				$black = document.querySelector('.black'),
+				offset = document.querySelector('.wrapper').offsetLeft,
+				flag = false;
+
+			$control.addEventListener('mousedown', function (e) {
+				flag = true;
+			});
+			document.addEventListener('mouseup', function () {
+				flag = false;
+			});
+			document.addEventListener('mousemove', function (e) {
+				if (!flag) return;
+
+				var position = e.x - offset;
+				position = position > 1099 ? 1099 : position;
+				position = position < 0 ? 0 : position;
+				$control.style.left = position - 25 + 'px';
+				$black.style.width = position + 'px';
+			});
+		</script>
+	</body>
+</html>
