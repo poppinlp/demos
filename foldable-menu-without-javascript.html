@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>css trick for foldable menu without javascript demo</title>
+	<link rel='stylesheet' href='assets/doggy.css' type='text/css' />
+	<style>
+	ul, li{
+		margin:0;
+		padding:0;
+	}
+	label {
+		font-size:1.4rem;
+		cursor:pointer;
+		background:#34495e;
+		color:#fff;
+		height:30px;
+		line-height:30px;
+		transition: background 0.3s;
+	}
+	label:hover {
+		background:#2c3e50;
+	}
+	ul {
+		list-style:none;
+	}
+	a {
+		display:block;
+		opacity:0;
+		height:0;
+		text-decoration:none;
+		background:#1abc9c;
+		color:#fff;
+		line-height:0;
+		transition: background 0.3s ease, height 0.5s ease, opacity 0.5s ease;
+	}
+	a:hover {
+		background:#16a085;
+	}
+	nav {
+		width:120px;
+		text-align:center;
+		float:left;
+		margin:0 50px;
+	}
+	nav label {
+		display:block;
+	}
+	nav input {
+		position:absolute;
+		left:-100px;
+		top:-100px;
+	}
+	input:checked ~ ul a {
+		opacity:1;
+		line-height:30px;
+		height:30px;
+	}
+	</style>
+</head>
+<body>
+	<h1>This demo is a simple css trick for foldable menu without javascript.</h1>
+	<nav>
+		<h2>Single select demo</h2>
+		<div class="item">
+			<input type="radio" id="tmall" name="single" />
+			<label for="tmall">天猫双11</label>
+			<ul>
+				<li><a href="javascript:void(0)">天猫</a></li>
+				<li><a href="javascript:void(0)">双11</a></li>
+				<li><a href="javascript:void(0)">尚天猫</a></li>
+				<li><a href="javascript:void(0)">就购了</a></li>
+				<li><a href="javascript:void(0)">喵喵喵喵</a></li>
+				<li><a href="javascript:void(0)">剁手舞</a></li>
+			</ul>
+		</div>
+		<div class="item">
+			<input type="radio" id="fe" name="single" />
+			<label for="fe">报名学前端</label>
+			<ul>
+				<li><a href="javascript:void(0)">同学们</a></li>
+				<li><a href="javascript:void(0)">有兴趣</a></li>
+				<li><a href="javascript:void(0)">学前端</a></li>
+				<li><a href="javascript:void(0)">就报名吧</a></li>
+			</ul>
+		</div>
+		<div class="item">
+			<input type="radio" id="fighting" name="single" />
+			<label for="fighting">加油哦</label>
+			<ul>
+				<li><a href="javascript:void(0)">买买买</a></li>
+				<li><a href="javascript:void(0)">买买买</a></li>
+				<li><a href="javascript:void(0)">买买买</a></li>
+				<li><a href="javascript:void(0)">买买买</a></li>
+			</ul>
+		</div>
+	</nav>
+	<nav>
+		<h2>Multi select demo</h2>
+		<div class="item">
+			<input type="checkbox" id="multi-1" />
+			<label for="multi-1">天猫双11</label>
+			<ul>
+				<li><a href="javascript:void(0)">天猫</a></li>
+				<li><a href="javascript:void(0)">双11</a></li>
+				<li><a href="javascript:void(0)">尚天猫</a></li>
+				<li><a href="javascript:void(0)">就购了</a></li>
+				<li><a href="javascript:void(0)">喵喵喵喵</a></li>
+				<li><a href="javascript:void(0)">剁手舞</a></li>
+			</ul>
+		</div>
+		<div class="item">
+			<input type="checkbox" id="multi-2" />
+			<label for="multi-2">报名学前端</label>
+			<ul>
+				<li><a href="javascript:void(0)">同学们</a></li>
+				<li><a href="javascript:void(0)">有兴趣</a></li>
+				<li><a href="javascript:void(0)">学前端</a></li>
+				<li><a href="javascript:void(0)">就报名吧</a></li>
+			</ul>
+		</div>
+		<div class="item">
+			<input type="checkbox" id="multi-3" />
+			<label for="multi-3">加油哦</label>
+			<ul>
+				<li><a href="javascript:void(0)">买买买</a></li>
+				<li><a href="javascript:void(0)">买买买</a></li>
+				<li><a href="javascript:void(0)">买买买</a></li>
+				<li><a href="javascript:void(0)">买买买</a></li>
+			</ul>
+		</div>
+	</nav>
+</body>
+</html>
