@@ -5,45 +5,118 @@
         <title>Scrollspy demo</title>
         <link href="assets/doggy.css" rel="stylesheet" type="text/css" />
         <style>
+            h1 {
+                text-align:center;
+            }
             article {
                 width:300px;
-                height:300px;
-                margin:0 auto;
+                margin:100px auto 500px;
             }
             ul {
-                position:absolute;
+                position:fixed;
                 left:50px;
                 top:50px;
+            }
+            li {
+                height:30px;
+                line-height:30px;
+                width:80px;
+                text-align:center;
+                background:#eee;
+                border:1px solid #ccc;
+                border-bottom-width:0;
+                color:#000;
+                cursor:pointer;
+            }
+            li:last-child {
+                border-bottom-width:1px;
+            }
+            .active {
+                background:#aaa;
+            }
+            p {
+                margin:1rem 0;
             }
         </style>
     </head>
     <body>
-        <h1>Scrollspy demo</h1>
-        <section>
-            <ul>
-                <li><a href="javascript:void(0)">sub1</a></li>
-                <li><a href="javascript:void(0)">sub2</a></li>
-                <li><a href="javascript:void(0)">sub3</a></li>
-                <li><a href="javascript:void(0)">sub4</a></li>
-            </ul>
-            <article>
-                <h2>Article title</h2>
-                <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
-                <h3>Sub title 1</h3>
-                <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
-                <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
-                <h3>Sub title 2</h3>
-                <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
-                <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
-                <h3>Sub title 3</h3>
-                <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
-                <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
-                <h3>Sub title 4</h3>
-                <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
-                <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
-            </article>
-        </section>
+        <h1>This is a simple scrollspy demo.</h1>
+        <ul>
+            <li>title</li>
+            <li>sub1</li>
+            <li>sub2</li>
+            <li>sub3</li>
+            <li>sub4</li>
+        </ul>
+        <article>
+            <h2>Article title</h2>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <h2>Sub title 1</h2>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <h2>Sub title 2</h2>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <h2>Sub title 3</h2>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <h2>Sub title 4</h2>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+            <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
+        </article>
     <script>
+        var offsetData = [],
+            $triggers = document.querySelectorAll('h2'),
+            $menu = document.querySelectorAll('li'),
+            len = $triggers.length,
+            ACTIVE = 0,
+            i;
+
+        for (i = 0; i < len; i++) {
+            offsetData.push($triggers[i].offsetTop);
+        }
+
+        document.addEventListener('scroll', function () {
+            var now = window.scrollY;
+            for (i = 0; i < len; i++) {
+                if (now >= offsetData[i] && now < (offsetData[i + 1] || document.documentElement.offsetHeight)) {
+                    freshMenu(i);
+                    return;
+                }
+            }
+        });
+        document.querySelector('ul').addEventListener('click', function (e) {
+            for (i = 0; i < len; i++) {
+                if (e.srcElement.isEqualNode($menu[i])) {
+                    window.scrollTo(0, offsetData[i]);
+                    freshMenu(i);
+                    return;
+                }
+            }
+        });
+
+        function freshMenu (index) {
+            $menu[ACTIVE].classList.remove('active');
+            ACTIVE = index;
+            $menu[ACTIVE].classList.add('active');
+        }
     </script>
     </body>
 </html>
