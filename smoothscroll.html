@@ -2,54 +2,49 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Scrollspy demo</title>
+        <title>Smoothscroll demo</title>
         <link href="assets/doggy.css" rel="stylesheet" type="text/css" />
         <style>
             h1 {
                 text-align:center;
             }
-            article {
-                width:300px;
-                margin:100px auto 500px;
-            }
             ul {
                 position:fixed;
-                left:50px;
-                top:50px;
+                bottom:50px;
+                right:50px;
             }
             li {
+                cursor:pointer;
+                border:solid 1px #ccc;
                 height:30px;
                 line-height:30px;
-                width:80px;
                 text-align:center;
-                background:#eee;
-                border:1px solid #ccc;
+                width:80px;
                 border-bottom-width:0;
-                color:#000;
-                cursor:pointer;
             }
             li:last-child {
                 border-bottom-width:1px;
             }
-            .active {
-                background:#aaa;
+            li:hover {
+                background:#eee;
             }
-            p {
-                margin:1rem 0;
+            article {
+                width:300px;
+                margin:0 auto 500px;
             }
         </style>
     </head>
     <body>
-        <h1>This is a simple scrollspy demo.</h1>
-        <ul>
-            <li class="active">title</li>
-            <li>sub1</li>
-            <li>sub2</li>
-            <li>sub3</li>
-            <li>sub4</li>
+        <h1>This a simple demo for smoothscroll. </h1>
+        <ul data-uix="smoothscroll" data-params='{"selToggle":"li"}'>
+            <li data-scroll="#p1">h1</li>
+            <li data-scroll="#p2">sub1</li>
+            <li data-scroll="#p3">sub2</li>
+            <li data-scroll="#p4">sub3</li>
+            <li data-scroll="#p5">sub4</li>
         </ul>
         <article>
-            <h2>Article title</h2>
+            <h2 id="p1">Article title</h2>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
@@ -59,7 +54,7 @@
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
-            <h2>Sub title 1</h2>
+            <h2 id="p2">Sub title 1</h2>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
@@ -68,7 +63,7 @@
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
-            <h2>Sub title 2</h2>
+            <h2 id="p3">Sub title 2</h2>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
@@ -77,7 +72,7 @@
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
-            <h2>Sub title 3</h2>
+            <h2 id="p4">Sub title 3</h2>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
@@ -87,7 +82,7 @@
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
-            <h2>Sub title 4</h2>
+            <h2 id="p5">Sub title 4</h2>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
@@ -96,42 +91,74 @@
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
             <p>Some words.Some words.Some words.Some words.Some words.Some words.Some words.</p>
         </article>
-    <script>
-        var offsetData = [],
-            $triggers = document.querySelectorAll('h2'),
-            $menu = document.querySelectorAll('li'),
-            len = $triggers.length,
-            ACTIVE = 0,
-            i;
+        <script src="assets/jquery.min.js"></script>
+        <script>
+            var doggy = {};
 
-        for (i = 0; i < len; i++) {
-            offsetData.push($triggers[i].offsetTop);
-        }
+            doggy.ua = {
+                webkit: navigator.userAgent.toLowerCase().indexOf('webkit') !== -1,
+                msie: navigator.userAgent.toLowerCase().indexOf('msie') !== -1,
+                ie6: navigator.userAgent.toLowerCase().indexOf('msie 6.0') !== -1
+            };
 
-        document.addEventListener('scroll', function () {
-            var now = window.scrollY;
-            for (i = 0; i < len; i++) {
-                if (now >= offsetData[i] && now < (offsetData[i + 1] || document.documentElement.offsetHeight)) {
-                    freshMenu(i);
-                    return;
+            doggy.initSmoothscroll = function (selContainer, config) {
+                var ndContainer = $(selContainer);
+                if (!ndContainer || ndContainer.data('init')) return;
+
+                var _config = {
+                    selToggle: 'a',
+                    easing: 'swing',
+                    duration: 300
+                };
+                $.extend(_config, config);
+
+                ndContainer.delegate(_config.selToggle, 'click', function () {
+                    var target = $(this).data('scroll'),
+                        box = doggy.ua.webkit ? document.body : document.documentElement;
+                    if (!target) target = 0;
+                    target = $.isNumeric(target) ? target : $(target).offset().top;
+                    $(box).animate({
+                        scrollTop: target
+                    },{
+                        duration: _config.duration,
+                        easing: _config.easing
+                    });
+                });
+
+                ndContainer.data('init', true);
+            };
+
+            $(document).ready(function () {
+                doggy.dataApi = {
+                    tab: [],
+                    dropdown: [],
+                    select: [],
+                    smoothscroll: [],
+                    dialog: [],
+                    placeholder: [],
+                    tooltip: [],
+                    checkbox: [],
+                    autohide: [],
+                    radio: [],
+                    switches: []
+                };
+                $('[data-uix]').each(function () {
+                    var instance = $(this),
+                        params = instance.data('params');
+                    doggy.dataApi[instance.data('uix')].push({
+                        element: instance,
+                        params: params
+                    });
+                });
+            });
+
+            $(document).ready(function () {
+                var list = doggy.dataApi.smoothscroll,
+                    len = list.length;
+                while (len--) {
+                    doggy.initSmoothscroll(list[len].element, list[len].params);
                 }
-            }
-        });
-        document.querySelector('ul').addEventListener('click', function (e) {
-            for (i = 0; i < len; i++) {
-                if (e.srcElement.isEqualNode($menu[i])) {
-                    window.scrollTo(0, offsetData[i]);
-                    freshMenu(i);
-                    return;
-                }
-            }
-        });
-
-        function freshMenu (index) {
-            $menu[ACTIVE].classList.remove('active');
-            ACTIVE = index;
-            $menu[ACTIVE].classList.add('active');
-        }
-    </script>
+            });
+        </script>
     </body>
 </html>
