@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>snow demo</title>
+	<style>
+		body,
+		html {
+			margin:0;
+			padding:0;
+			height:100%;
+			width:100%;
+		}
+		body {
+			background:#000;
+		}
+	</style>
+</head>
+<body>
+	<script src="assets/jquery.min.js"></script>
+	<script>
+		(function (f) {
+			var s = {
+				speed: 0,
+				interaction: true,
+				size: 2,
+				count: 200,
+				opacity: 0,
+				color: "#ffffff",
+				windPower: 0,
+				image: false
+			};
+			f.fn.let_it_snow = function (t) {
+				function m() {
+					k.clearRect(0, 0, d.width, d.height);
+					for (var b = 0; b < n; b++) {
+						var a = o[b],
+								e = p,
+								h = q,
+								l = a.x,
+								g = a.y,
+								i = Math.sqrt((l - e) * (l - e) + (g - h) * (g - h));
+						if (i < 100) h = (h - g) / i, g = 100 / (i * i) / 2, a.velX -= g * ((e - l) / i), a.velY -= g * h;
+						else {
+							a.velX *= 0.98;
+							if (a.velY <= a.speed) a.velY = a.speed;
+							switch (c.windPower) {
+								case false:
+									a.velX += Math.cos(a.step +=
+											0.05) * a.stepSize;
+									break;
+								case 0:
+									a.velX += Math.cos(a.step += 0.05) * a.stepSize;
+									break;
+								default:
+									a.velX += 0.01 + c.windPower / 100
+							}
+						}
+						e = /^#([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})$/.exec(c.color);
+						parseInt(e[1], 16);
+						parseInt(e[2], 16);
+						parseInt(e[3], 16);
+						a.y += a.velY;
+						a.x += a.velX;
+						(a.y >= d.height || a.y <= 0) && r(a);
+						(a.x >= d.width || a.x <= 0) && r(a);
+						c.image == false ? (e = new Image, e.src = "assets//img/snow.png", k.drawImage(e, a.x, a.y, a.size,
+								a.size)) : k.drawImage(f("img#lis_flake").get(0), a.x, a.y, a.size * 2, a.size * 2)
+					}
+					requestAnimationFrame(m)
+				}
+
+				function r(b) {
+					if (c.windPower == false || c.windPower == 0) b.x = Math.floor(Math.random() * d.width), b.y = 0;
+					else {
+						if (c.windPower > 0) var a = [Math.floor(Math.random() * d.width), 0],
+								e = [0, Math.floor(Math.random() * d.height)];
+						else a = [Math.floor(Math.random() * d.width), 0], e = [d.width, Math.floor(Math.random() * d.height)];
+						a = [a, e];
+						a = a[Math.floor(Math.random() * a.length)];
+						b.x = a[0];
+						b.y = a[1]
+					}
+					b.size = Math.random() * 3 + c.size;
+					b.speed = Math.random() * 1 + c.speed;
+					b.velY = b.speed;
+					b.velX = 0;
+					b.opacity = Math.random() * 0.5 + c.opacity
+				}
+				var c = f.extend({},
+								s, t),
+						j = f(this),
+						o = [],
+						d = j.get(0),
+						k = d.getContext("2d"),
+						n = c.count,
+						p = -100,
+						q = -100;
+				d.width = window.innerWidth;
+				d.height = window.innerHeight;
+				(function () {
+					window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+					window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function (b) {
+						window.setTimeout(b, 1E3 / 60)
+					}
+				})();
+				c.image != false && f("<img src='" + c.image + "' style='display: none' id='lis_flake'>").prependTo("body");
+				(function () {
+					for (var b = 0; b < n; b++) {
+						var a = Math.floor(Math.random() *
+								d.width),
+								e = Math.floor(Math.random() * d.height),
+								h = Math.random() * 3 + c.size,
+								f = Math.random() * 1 + c.speed,
+								g = Math.random() * 0.5 + c.opacity;
+						o.push({
+							speed: f,
+							velY: f,
+							velX: 0,
+							x: a,
+							y: e,
+							size: h,
+							stepSize: Math.random() / 30,
+							step: 0,
+							angle: 180,
+							opacity: g
+						})
+					}
+					m()
+				})();
+				f(window).resize(function () {
+					this.resizeTO && clearTimeout(this.resizeTO);
+					this.resizeTO = setTimeout(function () {
+						el2 = j.clone();
+						el2.insertAfter(j);
+						j.remove();
+						el2.let_it_snow(c)
+					}, 200)
+				});
+				c.interaction == true && d.addEventListener("mousemove", function (b) {
+					p = b.clientX;
+					q = b.clientY
+				})
+			}
+		})(window.jQuery);
+		$('<canvas width="100%" height="100%" style="position:fixed; z-index:2000; left:0px; top:0px; height:100%; width:100%; pointer-events:none;"></canvas>').appendTo(document.body).let_it_snow({
+			windPower: 2,
+			speed: 1,
+			count: 70,
+			size: 6,
+			opacity: 0.3,
+			interaction: false,
+			image: "assets/img/snow.png"
+		});
+	</script>
+</body>
+</html>
