@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>HTML to Canvas</title>
+</head>
+<body>
+    <h1>This is a title</h1>
+    <p>Some description</p>
+    <ul>
+        <li><a>A Link</a></li>
+        <li><a>A Link</a></li>
+        <li><a>A Link</a></li>
+        <li><a>A Link</a></li>
+    </ul>
+<script src="assets/html2canvas.js"></script>
+<script>
+    var anchor = document.createElement('a');
+    html2canvas(document.body, {
+        onrendered: function (canvas) {
+            anchor.href = canvas.toDataURL('image/png');
+            anchor.innerHTML = 'Download';
+            anchor.download = "body.png";
+            document.body.appendChild(anchor);
+        }
+    });
+</script>
+</body>
+</html>
