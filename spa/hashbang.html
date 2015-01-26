@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Hash bang</title>
+    <style>
+        body {
+            margin:0;
+        }
+        header {
+            height:80px;
+            background:#f00;
+            text-align:center;
+        }
+        nav {
+            background:#00f;
+        }
+        nav a {
+            color:#fff;
+        }
+        footer {
+            position:absolute;
+            bottom:0;
+            left:0;
+            height:80px;
+            width:100%;
+            background:#0f0;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+    <header>Header</header>
+    <nav>
+        <a href="#!home">home</a>
+        <a href="#!page1">page1</a>
+        <a href="#!page2">page2</a>
+        <a href="#!page3">page3</a>
+    </nav>
+    <main>Init</main>
+    <footer>Footer</footer>
+    <script src="../assets/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var cache = {};
+
+            if (window.location.hash) {
+                doAjax();
+            }
+            $(window).on('hashchange', function (e) {
+                doAjax();
+            });
+
+            function doAjax() {
+                var page = window.location.hash.slice(2);
+                if (cache[page]) {
+                    $('main').html(cache[page]);
+                    return;
+                }
+                $.ajax({
+                    url: window.location.hash.slice(2) + '.html',
+                    contentType: 'text/plain',
+                    dataType: 'html',
+                    success: function (data) {
+                        render(data);
+                        cache[page] = data;
+                    }
+                });
+            }
+
+            function render(data) {
+                $('main').html(data);
+            }
+        });
+    </script>
+</body>
+</html>
