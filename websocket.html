@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Websocket demo</title>
+    <style>
+        input,
+        button,
+        textarea {
+            font-size:16px;
+        }
+        input {
+            margin:10px 0;
+        }
+        textarea {
+            height:500px;
+            width:200px;
+            resize:none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input id="input" type="text" />
+        <button id="submit">Submit</button>
+    </div>
+    <textarea id="log"></textarea>
+    <script>
+        var ndInput = document.getElementById('input');
+        var ndSubmit = document.getElementById('submit');
+        var ndLog = document.getElementById('log');
+        var ws = new WebSocket('ws://echo.websocket.org');
+
+        ws.addEventListener('message', function (e) {
+            ndLog.value += 'Got: ' + e.data + '\r\n';
+        }, false);
+
+        ndSubmit.addEventListener('click', function () {
+            if (ws.readyState !== WebSocket.OPEN) return;
+            var val = ndInput.value.trim();
+            if (!val) return;
+            ws.send(val);
+            ndLog.value += 'Send: ' + val + '\r\n';
+        }, false);
+    </script>
+</body>
+</html>
