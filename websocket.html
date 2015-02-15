@@ -31,6 +31,10 @@
         var ndLog = document.getElementById('log');
         var ws = new WebSocket('ws://echo.websocket.org');
 
+        ws.addEventListener('open', function () {
+            console.log('open');
+        }, false);
+
         ws.addEventListener('message', function (e) {
             ndLog.value += 'Got: ' + e.data + '\r\n';
         }, false);
