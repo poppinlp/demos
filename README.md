@@ -11,4 +11,5 @@ Some demos for fun.
 - [Snow](https://poppinlp.github.io/demos/snow.html)
 - [SPA](https://poppinlp.github.io/demos/spa.html)
 - [WebSocket](https://poppinlp.github.io/demos/websocket.html)
-- [Editor](https://poppinlp.github.io/demos/editor.html)
+- [HTML 2 image](https://poppinlp.github.io/demos/html2image.html)
+- [ace-test](https://poppinlp.github.io/demos/ace-test.html)
