@@ -13,3 +13,4 @@ Some demos for fun.
 - [WebSocket](https://poppinlp.github.io/demos/websocket.html)
 - [HTML 2 image](https://poppinlp.github.io/demos/html2image.html)
 - [ace-test](https://poppinlp.github.io/demos/ace-test.html)
+- [template 1](https://poppinlp.github.io/demos/template/index.html)
