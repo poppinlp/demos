@@ -3,7 +3,7 @@
     <head>
         <title>ACE in Action</title>
         <style type="text/css" media="screen">
-            #editor { 
+            #editor {
                 position: absolute;
                 top: 0;
                 right: 0;
@@ -18,10 +18,17 @@
     return x;
 }</div>
         <script src="assets/ace/ace.js"></script>
+        <script src="assets/ace/ext-language_tools.js"></script>
         <script>
             var editor = ace.edit("editor");
-            editor.setTheme("ace/theme/monokai");
-            editor.getSession().setMode("ace/mode/javascript");
+            editor.session.setMode("ace/mode/javascript");
+            editor.setTheme("ace/theme/tomorrow");
+            // enable autocompletion and snippets
+            editor.setOptions({
+                enableBasicAutocompletion: true,
+                enableSnippets: true,
+                enableLiveAutocompletion: true
+            });
         </script>
     </body>
 </html>
