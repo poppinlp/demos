@@ -15,3 +15,4 @@ Some demos for fun.
 - [ace-test](https://poppinlp.github.io/demos/ace-test.html)
 - [Template 1](https://poppinlp.github.io/demos/template/index.html)
 - [Switch](https://poppinlp.github.io/demos/switch.html)
+- [ProgressBar](https://poppinlp.github.io/demos/progressBar.html)
