@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Transform demo</title>
+    <style>
+        #demo {
+            height:0;
+            width:0;
+            visibility:hidden;
+        }
+        label {
+            position:relative;
+            display:inline-block;
+            height:40px;
+            line-height:40px;
+            width:40px;
+            text-align:center;
+            border-radius:20px;
+            background-color:#1abc9c;
+            transition:background 0.2s ease-in-out, width 0.4s ease-in-out;
+            color:#fff;
+            text-decoration:none;
+            overflow:hidden;
+        }
+        label:hover {
+            background-color:#1dd2af;
+        }
+        label:after {
+            position:absolute;
+            top:0;
+            left:-160px;
+            width:160px;
+            content: 'Link to PoppinL';
+            transition:left 0.4s ease-in-out 0.4s;
+        }
+        #demo:checked ~ label {
+            width:160px;
+        }
+        #demo:checked ~ label:after {
+            left:0;
+            -webkit-animation:change 1s ease-in-out 1.2s;
+        }
+        @-webkit-keyframes change {
+            0% {
+                left:0;
+            }
+            25% {
+                left:-25px;
+            }
+            50% {
+                left:25px;
+            }
+            to {
+                left:-160px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="demo" />
+    <label for="demo"></label>
+</body>
+</html>

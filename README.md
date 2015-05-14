@@ -16,3 +16,4 @@ Some demos for fun.
 - [Template 1](https://poppinlp.github.io/demos/template/index.html)
 - [Switch](https://poppinlp.github.io/demos/switch.html)
 - [ProgressBar](https://poppinlp.github.io/demos/progressBar.html)
+- [Transition](https://poppinlp.github.io/demos/transition.html)
