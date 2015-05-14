@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Progress Bar Demo</title>
+    <style>
+        .progress-bar {
+            position:relative;
+            height:25px;
+            background:#ccc;
+        }
+        .progress-bar-content {
+            transition:width 0.4s;
+            position:absolute;
+            left:0;
+            top:0;
+            bottom:0;
+            width:0;
+            background:#69f;
+        }
+        a {
+            transition:all 0.4s;
+            display:inline-block;
+            margin:10px 10px 0 0;
+            height:25px;
+            line-height:25px;
+            width:60px;
+            text-align:center;
+            border:1px solid #ccc;
+            font-size:12px;
+            color:#333;
+            text-decoration:none;
+        }
+        a:hover {
+            color:#fff;
+            background:#69f;
+            border-color:#69f;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar">
+        <div class="js-progress-bar-content progress-bar-content"></div>
+    </div>
+    <a class="js-prev" href="javascript:void(0)">Prev</a>
+    <a class="js-next" href="javascript:void(0)">Next</a>
+    <script>
+        var prev = document.getElementsByClassName('js-prev').item(0);
+        var next = document.getElementsByClassName('js-next').item(0);
+        var bar = document.getElementsByClassName('js-progress-bar-content').item(0);
+
+        prev.addEventListener('click', function () {
+            var w = bar.style.width ? +(bar.style.width.slice(0, -1)) : 100;
+
+            bar.style.width = (w < 10 ? w + 90 : w - 10) + '%';
+        });
+        next.addEventListener('click', function () {
+            var w = bar.style.width ? +(bar.style.width.slice(0, -1)) : 0;
+
+            bar.style.width = (w > 90 ? w - 90 : w + 10) + '%';
+        });
+    </script>
+</body>
+</html>
