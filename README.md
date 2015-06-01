@@ -17,3 +17,4 @@ Some demos for fun.
 - [Switch](https://poppinlp.github.io/demos/switch.html)
 - [ProgressBar](https://poppinlp.github.io/demos/progressBar.html)
 - [Transition](https://poppinlp.github.io/demos/transition.html)
+- [Fileupload](https://poppinlp.github.io/demos/fileupload/fileupload.html)
