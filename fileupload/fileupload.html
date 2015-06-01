@@ -63,6 +63,8 @@
             });
 
             $('button').bind('click', function () {
+                if (!$previewImg.attr('src')) return;
+
                 html2canvas($previewWrapper, {
                     onrendered: function (canvas) {
                         var anchor = document.createElement('a');
