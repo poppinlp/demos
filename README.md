@@ -18,4 +18,4 @@ Some demos for fun.
 - [ProgressBar](https://poppinlp.github.io/demos/progressBar.html)
 - [Transition](https://poppinlp.github.io/demos/transition.html)
 - [Fileupload](https://poppinlp.github.io/demos/fileupload/fileupload.html)
-- [Keyframes](https://poppinlp.github.io/demos/keyframes.html)
+- [Keyframes](http://mangocheese.github.io/loading.css/)
