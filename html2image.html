@@ -18,11 +18,12 @@
 <script>
     var imgEle = document.getElementsByTagName('img').item(0);
 
-    imgEle.addEventListener('load', function () {
+    // to simply make sure image loaded
+    setTimeout(function () {
         html2canvas(document.body).then(function (canvas) {
             document.body.appendChild(canvas);
         });
-    });
+    }, 1000);
 </script>
 </body>
 </html>
