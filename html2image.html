@@ -7,6 +7,7 @@
 <body>
     <h1>This is a title</h1>
     <p>Some description</p>
+    <img src="http://d.hiphotos.baidu.com/image/pic/item/5fdf8db1cb1349542281ae65544e9258d1094a17.jpg">
     <ul>
         <li><a>A Link</a></li>
         <li><a>A Link</a></li>
@@ -15,14 +16,12 @@
     </ul>
 <script src="assets/html2canvas.js"></script>
 <script>
-    var anchor = document.createElement('a');
-    html2canvas(document.body, {
-        onrendered: function (canvas) {
-            anchor.href = canvas.toDataURL('image/png');
-            anchor.innerHTML = 'Download';
-            anchor.download = "body.png";
-            document.body.appendChild(anchor);
-        }
+    var imgEle = document.getElementsByTagName('img').item(0);
+
+    imgEle.addEventListener('load', function () {
+        html2canvas(document.body).then(function (canvas) {
+            document.body.appendChild(canvas);
+        });
     });
 </script>
 </body>
