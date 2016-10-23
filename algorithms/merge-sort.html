@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Merge Sort</title>
+</head>
+<body>
+    <pre>
+function mergeSort(arr) {
+    var len = arr.length,
+        mid = Math.floor(len / 2);
+
+    if (len === 1) return arr;
+
+    return (function () {
+        var left = mergeSort(arr.slice(0, mid)),
+            right = mergeSort(arr.slice(mid)),
+            res = [];
+
+        while (left.length && right.length) {
+            res.push(left[0] < right[0] ? left.shift() : right.shift());
+        }
+
+        return res.concat(left).concat(right);
+    })();
+}
+    </pre>
+    <script>
+function mergeSort(arr) {
+    var len = arr.length,
+        mid = Math.floor(len / 2);
+
+    if (len === 1) return arr;
+
+    return (function () {
+        var left = mergeSort(arr.slice(0, mid)),
+            right = mergeSort(arr.slice(mid)),
+            res = [];
+
+        while (left.length && right.length) {
+            res.push(left[0] < right[0] ? left.shift() : right.shift());
+        }
+
+        return res.concat(left).concat(right);
+    })();
+}
+    </script>
+</body>
+</html>

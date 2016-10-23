@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Abstract Factory</title>
+</head>
+<body>
+    <pre>
+    </pre>
+    <script>
+        function SmallTable() {
+            this.desc = function () {
+                console.log('small table');
+            }
+        };
+
+        function LargeTable() {
+            this.desc = function () {
+                console.log('large table');
+            }
+        };
+
+        function SmallChair() {
+            this.desc = function () {
+                console.log('small chair');
+            }
+        };
+
+        function LargeChair() {
+            this.desc = function () {
+                console.log('large chair');
+            }
+        };
+
+        function Factory() {};
+        Factory.prototype.create = function (type, name) {
+            switch(type) {
+                case 'small':
+                    break;
+                case 'large':
+                    break;
+            }
+        };
+
+        function TableFactory() {};
+        TableFactory.prototype = new Factory();
+
+        function ChairFactory() {};
+        ChairFactory.prototype = new Factory();
+
+        var smallTable = TableFactory.createSmall('small');
+        smallTable.desc();
+    </script>
+</body>
+</html>

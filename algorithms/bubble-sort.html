@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Bubble Sort</title>
+</head>
+<body>
+    <pre>
+function bubbleSort(arr) {
+    var len = arr.length,
+        j, tmp;
+
+    while (len--) {
+        for (j = len - 1; j >= 0; j--) {
+            if (arr[j + 1] > arr[j]) {
+                tmp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = tmp;
+            }
+        }
+    }
+
+    return arr;
+}
+    </pre>
+    <script>
+function bubbleSort(arr) {
+    var len = arr.length,
+        j, tmp;
+
+    while (len--) {
+        for (j = len - 1; j >= 0; j--) {
+            if (arr[j + 1] > arr[j]) {
+                tmp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = tmp;
+            }
+        }
+    }
+
+    return arr;
+}
+    </script>
+</body>
+</html>

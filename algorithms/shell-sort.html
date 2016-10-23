@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Shell Sort</title>
+</head>
+<body>
+    <pre>
+function shellSort(arr) {
+    var gap = Math.floor((arguments[1] || arr.length) / 2),
+        i, j, k, target;
+
+    if (!gap) return arr;
+
+    for (i = 0; i < gap; i++) {
+        for (j = i + gap; j < arr.length; j += gap) {
+            target = arr[j];
+            for (k = j - gap; k >= 0; k -= gap) {
+                if (target >= arr[k]) break;
+
+                arr[k + gap] = arr[k];
+            }
+            arr[k + gap] = target;
+        }
+    }
+
+    return shellSort(arr, gap);
+}
+    </pre>
+    <script>
+function shellSort(arr) {
+    var gap = Math.floor((arguments[1] || arr.length) / 2),
+        i, j, k, target;
+
+    if (!gap) return arr;
+
+    for (i = 0; i < gap; i++) {
+        for (j = i + gap; j < arr.length; j += gap) {
+            target = arr[j];
+            for (k = j - gap; k >= 0; k -= gap) {
+                if (target >= arr[k]) break;
+
+                arr[k + gap] = arr[k];
+            }
+            arr[k + gap] = target;
+        }
+    }
+
+    return shellSort(arr, gap);
+}
+    </script>
+</body>
+</html>

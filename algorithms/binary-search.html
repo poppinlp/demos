@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Binary Search</title>
+</head>
+<body>
+    <pre>
+function binarySearch(arr, target) {
+    var low = arguments[2] || 0,
+        high = arguments[3] || arr.length - 1,
+        mid = Math.floor((high + low) / 2);
+
+    if (high < low) return 'No such element';
+
+    switch (true) {
+        case arr[mid] === target:
+            return mid;
+        case arr[mid] < target:
+            return binarySearch(arr, target, mid + 1, high);
+        case arr[mid] > target:
+            return binarySearch(arr, target, low, mid - 1);
+    }
+}
+    </pre>
+    <script>
+function binarySearch(arr, target) {
+    var low = arguments[2] || 0,
+        high = arguments[3] || arr.length - 1,
+        mid = Math.floor((high + low) / 2);
+
+    if (high < low) return 'No such element';
+
+    switch (true) {
+        case arr[mid] === target:
+            return mid;
+        case arr[mid] < target:
+            return binarySearch(arr, target, mid + 1, high);
+        case arr[mid] > target:
+            return binarySearch(arr, target, low, mid - 1);
+    }
+}
+    </script>
+</body>
+</html>

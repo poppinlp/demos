@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Selection Sort</title>
+</head>
+<body>
+    <pre>
+function selectionSort(arr) {
+    var i, j, tmp;
+
+    for (i = 0; i < arr.length - 1; i++) {
+        tmp = i;
+        for (j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[tmp]) {
+                tmp = j;
+            }
+        }
+
+        j = arr[tmp];
+        arr[tmp] = arr[i];
+        arr[i] = j;
+    }
+    
+    return arr;
+}
+    </pre>
+    <script>
+function selectionSort(arr) {
+    var i, j, tmp;
+
+    for (i = 0; i < arr.length - 1; i++) {
+        tmp = i;
+        for (j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[tmp]) {
+                tmp = j;
+            }
+        }
+
+        j = arr[tmp];
+        arr[tmp] = arr[i];
+        arr[i] = j;
+    }
+    
+    return arr;
+}
+    </script>
+</body>
+</html>

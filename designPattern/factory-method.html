@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Factory Method</title>
+</head>
+<body>
+    <pre>
+        function SmallTable() {
+            this.desc = function () {
+                console.log('small table');
+            }
+        };
+
+        function LargeTable() {
+            this.desc = function () {
+                console.log('large table');
+            }
+        };
+
+        var Factory = {
+            createTable: function(type) {
+                switch(type) {
+                    case 'small':
+                        return new SmallTable();
+                        break;
+                    case 'large':
+                        return new LargeTable();
+                        break;
+                }
+            }
+        };
+
+        var smallTable = Factory.createTable('small');
+        smallTable.desc();
+    </pre>
+    <script>
+        function SmallTable() {
+            this.desc = function () {
+                console.log('small table');
+            }
+        };
+
+        function LargeTable() {
+            this.desc = function () {
+                console.log('large table');
+            }
+        };
+
+        var Factory = {
+            createTable: function(type) {
+                switch(type) {
+                    case 'small':
+                        return new SmallTable();
+                        break;
+                    case 'large':
+                        return new LargeTable();
+                        break;
+                }
+            }
+        };
+
+        var smallTable = Factory.createTable('small');
+        smallTable.desc();
+    </script>
+</body>
+</html>

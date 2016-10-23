@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Quick Sort</title>
+</head>
+<body>
+    <pre>
+function quickSort(arr) {
+    var low = arguments[1] || 0,
+        high = arguments[2] || (arr.length - 1);
+        left = low,
+        right = high;
+
+    if (left >= right) return;
+
+    var threshold = arr[left];
+
+    while (left < right) {
+        while (left < right && arr[right] >= threshold) right--;
+        arr[left] = arr[right];
+
+        while (left < right && arr[left] <= threshold) left++;
+        arr[right] = arr[left];
+    }
+
+    arr[left] = threshold;
+    quickSort(arr, low, left - 1);
+    quickSort(arr, left + 1, high);
+
+    return arr;
+}
+    </pre>
+    <script>
+function quickSort(arr) {
+    var low = arguments[1] || 0,
+        high = arguments[2] || (arr.length - 1);
+        left = low,
+        right = high;
+
+    if (left >= right) return;
+
+    var threshold = arr[left];
+
+    while (left < right) {
+        while (left < right && arr[right] >= threshold) right--;
+        arr[left] = arr[right];
+
+        while (left < right && arr[left] <= threshold) left++;
+        arr[right] = arr[left];
+    }
+
+    arr[left] = threshold;
+    quickSort(arr, low, left - 1);
+    quickSort(arr, left + 1, high);
+
+    return arr;
+}
+    </script>
+</body>
+</html>

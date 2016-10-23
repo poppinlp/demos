@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Insertion Sort</title>
+</head>
+<body>
+    <pre>
+function insertionSort(arr) {
+    var i, j, target;
+
+    for (i = 1; i < arr.length; i++) {
+        target = arr[i];
+        for (j = i - 1; j >= 0; j--) {
+            if (target >= arr[j]) break;
+
+            arr[j + 1] = arr[j];
+        }
+        arr[j + 1] = target;
+    }
+
+    return arr;
+}
+    </pre>
+    <script>
+function insertionSort(arr) {
+    var i, j, target;
+
+    for (i = 1; i < arr.length; i++) {
+        target = arr[i];
+        for (j = i - 1; j >= 0; j--) {
+            if (target >= arr[j]) break;
+
+            arr[j + 1] = arr[j];
+        }
+        arr[j + 1] = target;
+    }
+
+    return arr;
+}
+    </script>
+</body>
+</html>
